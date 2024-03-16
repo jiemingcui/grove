@@ -147,6 +147,40 @@
   </div>
 </section>
 
+<!-- add 3D json modules -->
+<div id="results" class="content-block">
+  <h2 class="sub-title has-text-centered">Human Pose Generation in 3D Scenes</h2>
+
+  <div class="task">
+    <div class="columns is-centered" style="position: relative;">
+      <div class="control" style="position: absolute; left: 3%;">
+        <label class="radio">
+          <input value="MPH1Library" type="radio" name="scene"> MPH1Library
+        </label>
+        <br>
+        <label class="radio">
+          <input value="MPH16" type="radio" name="scene"> MPH16
+        </label>
+        <br>
+        <label class="radio">
+          <input value="N0SittingBooth" type="radio" name="scene"> N0SittingBooth
+        </label>
+        <br>
+        <label class="radio">
+          <input value="N3OpenArea" type="radio" name="scene"> N3OpenArea
+        </label>
+      </div>
+      <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
+      <canvas id="webgl_pose" style="height: 50%; width: 50%;"></canvas>
+    </div>
+    <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;">Note: Click the radio button to select a scene for result visualization and drag to move your view around.</p>
+  </div>
+</div>
+
+
+
+
+
 
 <section class="hero is-light is-small">
   <div class="hero-body">
