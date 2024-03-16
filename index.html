@@ -155,31 +155,27 @@
     <div class="columns is-centered" style="position: relative;">
       <div class="control" style="position: absolute; left: 3%;">
         <label class="radio">
-          <input value="MPH1Library" type="radio" name="scene"> MPH1Library
+          <input value="Raise two arms" type="radio" name="scene"> Raise two arms
         </label>
         <br>
         <label class="radio">
-          <input value="MPH16" type="radio" name="scene"> MPH16
+          <input value="Hit by right arm" type="radio" name="scene"> Hit by right arm
         </label>
         <br>
         <label class="radio">
-          <input value="N0SittingBooth" type="radio" name="scene"> N0SittingBooth
+          <input value="Sit down" type="radio" name="scene"> Sit down
         </label>
         <br>
         <label class="radio">
-          <input value="N3OpenArea" type="radio" name="scene"> N3OpenArea
+          <input value="Cha-cha dance" type="radio" name="scene"> Cha-cha dance
         </label>
       </div>
       <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
       <canvas id="webgl_pose" style="height: 50%; width: 50%;"></canvas>
     </div>
-    <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;">Note: Click the radio button to select a scene for result visualization and drag to move your view around.</p>
+    <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
   </div>
 </div>
-
-
-
-
 
 
 <section class="hero is-light is-small">
@@ -206,7 +202,7 @@
         </div>
         <div class="item item-fullbody">
           <video poster="" id="qiaqia" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/qiaqia.mp4"
+            <source src="./static/videos/chacha.mp4"
                     type="video/mp4">
           </video>
         </div>
@@ -330,4 +326,141 @@
 </footer>
 
 </body>
+
+<script type="module">
+
+  import * as THREE from 'three'
+  import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
+  import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
+
+  // pose generation in 3D scene
+  let canvas1 = document.querySelector('#webgl_pose')
+  let scene1 = new THREE.Scene()
+  let assetLoader1 = new GLTFLoader()
+  let model1
+
+  let camera1 = new THREE.PerspectiveCamera(45, 1.618 / 1.0, 0.1, 100)
+  camera1.position.set(4, 3, -3)
+  let grid1 = new THREE.GridHelper(30, 30)
+  scene1.add(camera1)
+  scene1.add(grid1)
+  for (let i = 0; i <= 1; i++) {
+    for (let k = 0; k <= 1; k++) {
+      let spotLight = new THREE.SpotLight(0xAAAAAA)
+      spotLight.position.set(50 * (i * 2 - 1), 100, 100 * (k * 2 - 1))
+      scene1.add(spotLight)
+    }
+  }
+
+  let controls1 = new OrbitControls(camera1, canvas1)
+  controls1.enableZoom = true
+  // controls2.enableDamping = true
+  controls1.object.position.set(camera1.position.x, camera1.position.y, camera1.position.z)
+  controls1.target = new THREE.Vector3(0, 0, 0)
+  controls1.update()
+
+  let renderer1 = new THREE.WebGLRenderer({
+      canvas: canvas1,
+      alpha: true,
+  })
+  renderer1.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  renderer1.outputEncoding = THREE.sRGBEncoding
+  renderer1.setAnimationLoop(() => {
+    renderer1.render(scene1, camera1)
+  });
+
+  const radioButtons = document.querySelectorAll('input[name="scene"]')
+  for (const radioButton of radioButtons) {
+    radioButton.addEventListener('change', (e) => {
+      scene1.remove(model1)
+      document.querySelector('#pose_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
+      for (const rb of radioButtons) {rb.disabled = true}
+
+      let assetUrl = new URL('./assets/generated_motions/'+radioButton.value+'.glb', import.meta.url)
+      assetLoader1.load(assetUrl.href, gltf => {
+        model1 = gltf.scene
+        model1.rotateX(-Math.PI / 2)
+        scene1.add(model1)
+        document.querySelector('#pose_loading').innerHTML = ''
+        for (const rb of radioButtons) {rb.disabled = false}
+      }, undefined, (error) => {console.error(error)})
+    })
+  }
+  radioButtons[0].click()
+
+  // // grasp generation for 3D object
+  // let canvas2 = document.querySelector('#webgl_grasp')
+  // let scene2 = new THREE.Scene()
+  // let assetLoader2 = new GLTFLoader()
+  // let model2
+
+  // let camera2 = new THREE.PerspectiveCamera(45, 1.618 / 1.0, 0.1, 100)
+  // camera2.position.set(0.25, 0.2, -0.25)
+  // let grid2 = new THREE.GridHelper(30, 30)
+  // scene2.add(camera2)
+  // scene2.add(grid2)
+  // for (let ax = 0; ax < 3; ax++) {
+  //   for (let i = 0; i <= 1; i++) {
+  //     let spotLight = new THREE.SpotLight(0xAAAAAA)
+  //     spotLight.position.set(
+  //       ax == 0 ? 50 * (i * 2 - 1): 0,
+  //       ax == 1 ? 50 * (i * 2 - 1): 0,
+  //       ax == 2 ? 50 * (i * 2 - 1): 0,
+  //     )
+  //     scene2.add(spotLight)
+  //   }
+  // }
+
+  // let controls2 = new OrbitControls(camera2, canvas2)
+  // controls2.enableZoom = true
+  // // controls2.enableDamping = true
+  // controls2.object.position.set(camera2.position.x, camera2.position.y, camera2.position.z)
+  // controls2.target = new THREE.Vector3(0, 0, 0)
+  // controls2.update()
+
+  // let renderer2 = new THREE.WebGLRenderer({
+  //     canvas: canvas2,
+  //     alpha: true,
+  // })
+  // renderer2.setPixelRatio(Math.min(window.devicePixelRatio, 2))
+  // renderer2.outputEncoding = THREE.sRGBEncoding
+  // renderer2.setAnimationLoop(() => {
+  //   renderer2.render(scene2, camera2)
+  // });
+
+  // const objSel = document.querySelector('#objectSelector')
+  // const samSel = document.querySelector('#sampleSelector')
+  // objSel.value = 'ycb+baseball'
+  // samSel.value = 'grasp_0'
+
+  // function load_model2(e) {
+  //   if (objSel.value == '' || samSel.value == '') {
+  //     return
+  //   }
+  //   scene2.remove(model2)
+  //   document.querySelector('#grasp_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
+  //   let assetUrl = new URL(`./assets/grasp_generation_color/${objSel.value}/${samSel.value}.glb`, import.meta.url)
+  //   assetLoader2.load(assetUrl.href, gltf => {
+  //     model2 = gltf.scene
+  //     scene2.add(model2)
+  //     document.querySelector('#grasp_loading').innerHTML = ''
+  //   }, undefined, (error) => {console.error(error)})
+  // }
+
+  objSel.addEventListener('change', (e) => {samSel.value = ''})
+  samSel.addEventListener('change', load_model2)
+  load_model2()
+
+  // resize renderers
+  function resizeRenderers() {
+    let content_width = document.querySelector('#results').offsetWidth
+    renderer1.setSize(content_width, content_width / 1.618)
+    renderer2.setSize(content_width, content_width / 1.618)
+  }
+  window.addEventListener('resize', () => {
+    resizeRenderers()
+  })
+  resizeRenderers()
+</script>
+
 </html>
