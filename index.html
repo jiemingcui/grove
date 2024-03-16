@@ -1,44 +1,132 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset="utf-8">
-  <meta name="description"
-        content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-  <meta name="keywords" content="Open-Vocabulary, Physical skill, Interactive agent">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AnySkill: Learning Open-Vocabulary Physical Skill for Interactive Agents</title>
+<meta charset="utf-8">
+<meta name="description"
+      content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
+<meta name="keywords" content="Open-Vocabulary, Physical skill, Interactive agent">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AnySkill: Learning Open-Vocabulary Physical Skill for Interactive Agents</title>
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
 
-  <!-- Global site tag (gtag.js) - Google Analytics -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
 
-    function gtag() {
-      dataLayer.push(arguments);
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  gtag('js', new Date());
+
+  gtag('config', 'G-PYVRSFMDRL');
+</script>
+
+<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+      rel="stylesheet">
+
+<link rel="stylesheet" href="./static/css/bulma.min.css">
+<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+<link rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+<link rel="stylesheet" href="./static/css/index.css">
+<link rel="icon" href="./static/images/icon.svg">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script defer src="./static/js/fontawesome.all.min.js"></script>
+<script src="./static/js/bulma-carousel.min.js"></script>
+<script src="./static/js/bulma-slider.min.js"></script>
+<script src="./static/js/index.js"></script>
+<style>
+  html {
+    height: 100%;
+    background-color: #fafafa;
+  }
+
+  body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #fafafa;
+  }
+
+  #app {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+  hr {
+    background-color: #f1f1f1;
+  }
+
+  .table th {
+    padding: 0.2em 0.2em 0 0.2em;
+    width: 50%;
+  }
+
+  .table td {
+    padding: 0.25em;
+    width: 50%;
+  }
+
+  .content-block {
+    padding: 0 6px;
+  }
+
+  .title {
+    font-size: 32px;
+    padding-top: 32px;
+  }
+
+  .publisher {
+    margin-bottom: 1rem;
+  }
+
+  .sub-title {
+    font-size: 26px;
+    padding-bottom: 16px;
+  }
+
+  .subsub-title {
+    font-size: 20px;
+    padding-bottom: 8px;
+  }
+
+  .author {
+    font-size: 16px;
+  }
+
+  .task {
+    padding-bottom: 12px;
+  }
+
+  @media screen and (min-width: 880px) {
+    .is-840px {
+      flex: none;
+      width: 840px;
     }
-
-    gtag('js', new Date());
-
-    gtag('config', 'G-PYVRSFMDRL');
-  </script>
-
-  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-        rel="stylesheet">
-
-  <link rel="stylesheet" href="./static/css/bulma.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-  <link rel="stylesheet"
-        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-  <link rel="stylesheet" href="./static/css/index.css">
-  <link rel="icon" href="./static/images/icon.svg">
-
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script defer src="./static/js/fontawesome.all.min.js"></script>
-  <script src="./static/js/bulma-carousel.min.js"></script>
-  <script src="./static/js/bulma-slider.min.js"></script>
-  <script src="./static/js/index.js"></script>
+  }
+  @media screen and (max-width: 879px) {
+    .is-100per {
+      flex: none;
+      width: 100%;
+    }
+  }
+</style>
+<script type="importmap">
+  {
+    "imports": {
+      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
+      "three": "https://unpkg.com/three@0.127.0/build/three.module.js",
+      "three/addons/": "https://unpkg.com/three@0.127.0/examples/jsm/"
+    }
+  }
+</script>
 </head>
 <body>
 
