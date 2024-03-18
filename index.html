@@ -489,18 +489,11 @@
   })
   renderer1.setPixelRatio(Math.min(window.devicePixelRatio,2))
   renderer1.outputEncoding = THREE.sRGBEncoding
+
   // renderer1.setAnimationLoop(() => {
   //   renderer1.render(scene1, camera1)
   //   // tick()
   // });
-
-  function animate() {
-      if(mixer)
-          mixer.update(clock.getDelta());
-      renderer.render(scene1, camera1);
-  }
-
-  renderer1.setAnimationLoop(animate);
 
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
@@ -536,6 +529,13 @@
   }
   radioButtons[0].click()
   
+  function animate() {
+      if(mixer)
+          mixer.update(clock.getDelta());
+      renderer1.render(scene1, camera1);
+  }
+
+  renderer1.setAnimationLoop(animate);
   // // grasp generation for 3D object
   // let canvas2 = document.querySelector('#webgl_grasp')
   // let scene2 = new THREE.Scene()
