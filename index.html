@@ -488,25 +488,25 @@
   renderer1.setPixelRatio(window.devicePixelRatio)
   renderer1.outputEncoding = THREE.sRGBEncoding
   
-  const tick = () => {
-    const elapsedTime = clock.getElapsedTime();
-    const deltaTime = elapsedTime - previousTime;
-    previousTime = elapsedTime;
-    // Update mixer
-    if (mixer) {
-      mixer.update(deltaTime);
-    }
-    // Update controls
-    controls.update();
-    // // Render
-    renderer1.render(scene1, camera1);
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick);
-  };
+  // const tick = () => {
+  //   const elapsedTime = clock.getElapsedTime();
+  //   const deltaTime = elapsedTime - previousTime;
+  //   previousTime = elapsedTime;
+  //   // Update mixer
+  //   if (mixer) {
+  //     mixer.update(deltaTime);
+  //   }
+  //   // Update controls
+  //   controls.update();
+  //   // // Render
+  //   renderer1.render(scene1, camera1);
+  //   // Call tick again on the next frame
+  //   window.requestAnimationFrame(tick);
+  // };
 
   renderer1.setAnimationLoop(() => {
     renderer1.render(scene1, camera1)
-    tick()
+    // tick()
   });
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
@@ -521,9 +521,9 @@
       let mixer = null;
       
       assetLoader1.load(assetUrl.href, gltf => {
-        mixer = new THREE.AnimationMixer(gltf.scene);
-        const action = mixer.clipAction(gltf.animations[0]);
-        action.play();
+        // mixer = new THREE.AnimationMixer(gltf.scene);
+        // const action = mixer.clipAction(gltf.animations[0]);
+        // action.play();
         model1 = gltf.scene
         model1.rotateX(-Math.PI / 2)
         scene1.add(model1)
