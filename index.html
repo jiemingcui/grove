@@ -1,226 +1,259 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="utf-8">
-<meta name="description"
-      content="Deformable Neural Radiance Fields creates free-viewpoint portraits (nerfies) from casually captured videos.">
-<meta name="keywords" content="Open-Vocabulary, Physical skill, Interactive agent">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>AnySkill: Learning Open-Vocabulary Physical Skill for Interactive Agents</title>
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"> -->
-<!-- <link rel="stylesheet" href="./css/bulma.min.css"> -->
+  <meta charset="utf-8">
+  <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
+  <!-- Replace the content tag with appropriate information -->
+  <meta name="description" content="DESCRIPTION META TAG">
+  <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
+  <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
+  <meta property="og:url" content="URL OF THE WEBSITE"/>
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
+  <meta property="og:image" content="static/image/your_banner_image.png" />
+  <meta property="og:image:width" content="1200"/>
+  <meta property="og:image:height" content="630"/>
 
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script> -->
-<script>
-  window.dataLayer = window.dataLayer || [];
 
-  function gtag() {
-    dataLayer.push(arguments);
-  }
+  <meta name="twitter:title" content="TWITTER BANNER TITLE META TAG">
+  <meta name="twitter:description" content="TWITTER BANNER DESCRIPTION META TAG">
+  <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
+  <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <!-- Keywords for your paper to be indexed by-->
+  <meta name="keywords" content="KEYWORDS SHOULD BE PLACED HERE">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  gtag('js', new Date());
 
-  gtag('config', 'G-PYVRSFMDRL');
-</script>
+  <title>Scaling Up Dynamic Human-Scene Interaction Modeling</title>
+  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+  rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
-      rel="stylesheet">
+  <link rel="stylesheet" href="static/css/bulma.min.css">
+  <link rel="stylesheet" href="static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="static/css/index.css">
 
-<link rel="stylesheet" href="./css/bulma.min.css">
-<link rel="stylesheet" href="./static/css/bulma.min.css">
-<link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
-<link rel="stylesheet" href="./static/css/bulma-slider.min.css">
-<link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
-<link rel="stylesheet"
-      href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
-<link rel="stylesheet" href="./static/css/index.css">
-<link rel="icon" href="./static/images/icon.svg">
-
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script defer src="./static/js/fontawesome.all.min.js"></script>
-<script src="./static/js/bulma-carousel.min.js"></script>
-<script src="./static/js/bulma-slider.min.js"></script>
-<!-- <script src="./static/js/index.js"></script> -->
-<style>
-  html {
-    height: 100%;
-    background-color: #fafafa;
-  }
-
-  body {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    background-color: #fafafa;
-  }
-
-  #app {
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-
-  hr {
-    background-color: #f1f1f1;
-  }
-
-  .table th {
-    padding: 0.2em 0.2em 0 0.2em;
-    width: 50%;
-  }
-
-  .table td {
-    padding: 0.25em;
-    width: 50%;
-  }
-
-  .content-block {
-    padding: 0 6px;
-  }
-
-  .title {
-    font-size: 32px;
-    padding-top: 32px;
-  }
-
-  .publisher {
-    margin-bottom: 1rem;
-  }
-
-  .sub-title {
-    font-size: 26px;
-    padding-bottom: 16px;
-  }
-
-  .subsub-title {
-    font-size: 20px;
-    padding-bottom: 8px;
-  }
-
-  .author {
-    font-size: 16px;
-  }
-
-  .task {
-    padding-bottom: 12px;
-  }
-
-  @media screen and (min-width: 880px) {
-    .is-840px {
-      flex: none;
-      width: 840px;
-    }
-  }
-  @media screen and (max-width: 879px) {
-    .is-100per {
-      flex: none;
-      width: 100%;
-    }
-  }
-</style>
-<script type="importmap">
-  {
-    "imports": {
-      "vue": "https://unpkg.com/vue@3/dist/vue.esm-browser.js",
-      "three": "https://unpkg.com/three@0.127.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.127.0/examples/jsm/"
-    }
-  }
-</script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://documentcloud.adobe.com/view-sdk/main.js"></script>
+  <script defer src="static/js/fontawesome.all.min.js"></script>
+  <script src="https://kit.fontawesome.com/d383128d10.js" crossorigin="anonymous"></script>
+  <script src="static/js/bulma-carousel.min.js"></script>
+  <script src="static/js/bulma-slider.min.js"></script>
+  <!-- <script src="static/js/index.js"></script> -->
 </head>
 
 <body>
-<section class="hero">
+  <section class="hero">
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <div class="columns is-centered">
+          <div class="column has-text-centered">
+            <h1 class="title is-1 publication-title">AnySkill: Learning Open-Vocabulary Physical Skill for Interactive Agents</h1>
+            <div class="is-size-5 publication-authors">
+              <span class="author-block">
+                <a href="https://jiemingcui.github.io/">Jieming Cui</a><sup>1,2</sup>,</span>
+              <span class="author-block">
+                <a href="http://tengyu.ai/">Tengyu Liu</a><sup>2</sup>,</span>
+              <span class="author-block">
+                <a href="https://anyskill.github.io/">Nian Liu</a><sup>3</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://www.yangyaodong.com/">Yaodong Yang</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://yzhu.io/">Yixin Zhu</a><sup>1</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://siyuanhuang.com/">Siyuan Huang</a><sup>2</sup>,
+              </span>
+            </div>
+  
+            <div class="is-size-5 publication-authors">
+              <span class="author-block"><sup>1</sup>Institute for Artificial Intelligence, Peking University,</span>
+              <span class="author-block"><sup>2</sup>National Key Laboratory of General Artificial Intelligence, BIGAI,</span>
+              <span class="author-block"><sup>3</sup>School of Artificial Intelligence, Beijing University of Posts and Telecommunications</span>
+            </div>
+  
+            <div class="column has-text-centered">
+              <div class="publication-links">
+                <!-- PDF Link. -->
+                <span class="link-block">
+                  <a href="https://anyskill.github.io/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fas fa-file-pdf"></i>
+                    </span>
+                    <span>Paper</span>
+                  </a>
+                </span>
+                <span class="link-block">
+                  <a href="https://anyskill.github.io/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="ai ai-arxiv"></i>
+                    </span>
+                    <span>arXiv</span>
+                  </a>
+                </span>
+                <!-- Video Link. -->
+                <span class="link-block">
+                  <a href="https://anyskill.github.io/"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-youtube"></i>
+                    </span>
+                    <span>Video</span>
+                  </a>
+                </span>
+                <!-- Code Link. -->
+                <span class="link-block">
+                  <a href="https://github.com/jiemingcui/anyskill"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="fab fa-github"></i>
+                    </span>
+                    <span>Code</span>
+                    </a>
+                </span>
+                <!-- Dataset Link.
+                <span class="link-block">
+                  <a href="https://github.com/google/nerfies/releases/tag/0.1"
+                     class="external-link button is-normal is-rounded is-dark">
+                    <span class="icon">
+                        <i class="far fa-images"></i>
+                    </span>
+                    <span>Data</span>
+                    </a> -->
+              </div>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+<!-- Video carousel -->
+<!-- <section class="hero is-small is-light">
   <div class="hero-body">
     <div class="container is-max-desktop">
-      <div class="columns is-centered">
-        <div class="column has-text-centered">
-          <h1 class="title is-1 publication-title">AnySkill4: Learning Open-Vocabulary Physical Skill for Interactive Agents</h1>
-          <div class="is-size-5 publication-authors">
-            <span class="author-block">
-              <a href="https://jiemingcui.github.io/">Jieming Cui</a><sup>1,2</sup>,</span>
-            <span class="author-block">
-              <a href="http://tengyu.ai/">Tengyu Liu</a><sup>2</sup>,</span>
-            <span class="author-block">
-              <a href="https://anyskill.github.io/">Nian Liu</a><sup>3</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://www.yangyaodong.com/">Yaodong Yang</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://yzhu.io/">Yixin Zhu</a><sup>1</sup>,
-            </span>
-            <span class="author-block">
-              <a href="https://siyuanhuang.com/">Siyuan Huang</a><sup>2</sup>,
-            </span>
+      <div class="has-text-centered">
+        <h2 class="title is-3">Synthesized Motions of Our Method</h2>
+      </div>
+      
+      
+      <div id="results-carousel" class="carousel results-carousel">
+        <div class="item item-video1">
+          <div class="item has-text-centered">
+            <video poster="" id="video1" autoplay controls muted loop height="100%">
+              <source src="static/videos/Game_1.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Real-time Game Control</h1>
           </div>
-
-          <div class="is-size-5 publication-authors">
-            <span class="author-block"><sup>1</sup>Institute for Artificial Intelligence, Peking University,</span>
-            <span class="author-block"><sup>2</sup>National Key Laboratory of General Artificial Intelligence, BIGAI,</span>
-            <span class="author-block"><sup>3</sup>School of Artificial Intelligence, Beijing University of Posts and Telecommunications</span>
+        </div>
+        
+        <div class="item item-video2">
+          <div class="item has-text-centered">
+            <video poster="" id="video2" autoplay controls muted loop height="100%">
+              <source src="static/videos/Bottle_1.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Synthesized Motions with objects dynamically involved</h1>
           </div>
-
-          <div class="column has-text-centered">
-            <div class="publication-links">
-              <!-- PDF Link. -->
-              <span class="link-block">
-                <a href="https://anyskill.github.io/"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fas fa-file-pdf"></i>
-                  </span>
-                  <span>Paper</span>
-                </a>
-              </span>
-              <span class="link-block">
-                <a href="https://anyskill.github.io/"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="ai ai-arxiv"></i>
-                  </span>
-                  <span>arXiv</span>
-                </a>
-              </span>
-              <!-- Video Link. -->
-              <span class="link-block">
-                <a href="https://anyskill.github.io/"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-youtube"></i>
-                  </span>
-                  <span>Video</span>
-                </a>
-              </span>
-              <!-- Code Link. -->
-              <span class="link-block">
-                <a href="https://github.com/jiemingcui/anyskill"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="fab fa-github"></i>
-                  </span>
-                  <span>Code</span>
-                  </a>
-              </span>
-              <!-- Dataset Link.
-              <span class="link-block">
-                <a href="https://github.com/google/nerfies/releases/tag/0.1"
-                   class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                      <i class="far fa-images"></i>
-                  </span>
-                  <span>Data</span>
-                  </a> -->
-            </div>
-
+        </div>
+        <div class="item item-video3">
+          <div class="item has-text-centered">
+            <video poster="" id="video3" autoplay controls muted loop height="100%">
+              <source src="static/videos/Phone_1.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Synthesized Motions with objects dynamically involved</h1>
+          </div>
+        </div>
+        
+        <div class="item item-video4">
+          <div class="item has-text-centered">
+            <video poster="" id="video4" autoplay controls muted loop height="100%">
+              <source src="static/videos/DiverseMotion_1.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Diverse synthesized locomotion and interaction with object scenes</h1>
+          </div>
+        </div>
+        <div class="item item-video5">
+          <div class="item has-text-centered">
+            <video poster="" id="video5" autoplay controls muted loop height="100%">
+              <source src="static/videos/AvoidCollision_1.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Natural collision avoidance</h1>
+          </div>
+        </div>
+        <div class="item item-video6">
+          <div class="item has-text-centered">
+            <video poster="" id="video6" autoplay controls muted loop height="100%">
+              <source src="static/videos/AvoidCollision_2_1.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Natural collision avoidance</h1>
+          </div>
+        </div>
+        <div class="item item-video7">
+          <div class="item has-text-centered">
+            <video poster="" id="video7" autoplay controls muted loop height="100%">\
+              <source src="static/videos/AnyStart_1_lower.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Motion synthesis starting from any pose</h1>
           </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
+<!-- End video carousel -->
 
+
+<!-- Teaser demo-->
+<!-- <section class="hero is-small">
+  <div class="hero-body">
+    <div id="teaser-demo" class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Demos of TRUMANS dataset</h2>
+        <h2 class="subtitle"><sup>*</sup>Drag mouse to rotate & scroll wheel to zoom in/out</h2>
+      </div>
+      <div class="carousel demo-carousel">
+        <div class="item has-text-centered">
+          <canvas id="canvas1" class="webgl" style="height: 100%; width: 100%;"></canvas>
+          <h2 class="subtitle has-text-centered">
+            A Motion clip from TRUMANS dataset in a bedroom.
+          </h2>
+        </div>
+
+        <div class="item has-text-centered">
+          <canvas id="canvas2" class="webgl" style="height: 100%; width: 100%;"></canvas>
+          <h2 class="subtitle has-text-centered">
+            A Motion clip from TRUMANS dataset in a living room.
+          </h2>
+        </div>
+
+        <div class="item has-text-centered">
+          <canvas id="canvas3" class="webgl" style="height: 100%; width: 100%;"></canvas>
+          <h2 class="subtitle has-text-centered">
+            A Motion clip from TRUMANS dataset in a kitchen.
+          </h2>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section> -->
 <section class="hero teaser">
   <div class="container is-max-desktop">
     <div class="hero-body">
@@ -234,195 +267,192 @@
     </div>
   </div>
 </section>
+<!-- End teaser demo -->
 
 
-<section class="section">
-  <div class="container is-max-desktop">
-    <!-- Abstract. -->
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Abstract</h2>
-        <div class="content has-text-justified">
-          <p>
-            We propose <span class="dnerf">AnySkill</span>, a novel hierarchical method that learns physically plausible interactions following open-vocabulary instructions.
-          </p>
-          <p>
-            Our approach begins by developing a set of atomic actions via a low-level controller trained via imitation learning. 
-            Upon receiving an open-vocabulary textual instruction, <span class="dnerf">AnySkill</span> employs a high-level policy that selects and integrates these atomic actions to maximize the CLIP similarity between the agent's rendered images and the text.
-            An important feature of our method is the use of image-based rewards for the high-level policy, which allows the agent to learn interactions with objects without manual reward engineering. 
-          </p>
-          <p>
-            We show that <span class="dnerf">AnySkill</span> can turn casually captured selfie
-            We demonstrate <span class="dnerf">AnySkill</span>'s capability to generate realistic and natural motion sequences in response to unseen instructions of varying lengths, 
-            marking it the first method capable of open-vocabulary physical skill learning for interactive humanoid agents.
-          </p>
-        </div>
-      </div>
-    </div>
-    <!--/ Teaser. -->
-    
-    <br />
-
-    <div class="columns is-centered has-text-centered">
-      <img src="./static/images/teaser.png"
-            class="teaser"
-            alt="Teaser and anyskill model."
-            width="960"
-            height="720"/>
-    </div>
-
-    <h2 class="subtitle has-text-centered">
-      <span class="dnerf">AnySkill</span> model
-    </h2>
-    <!-- Paper video.
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-four-fifths">
-        <h2 class="title is-3">Video</h2>
-        <div class="publication-video">
-          <iframe src="https://www.youtube.com/embed/MrKrnHhk8IA?rel=0&amp;showinfo=0"
-                  frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-        </div>
-      </div>
-    </div>
-    Paper video. -->
-  </div>
-</section>
-
-
-<!-- <div class="columns is-centered has-text-centered">
-  <h2 class="title is-3">3D visualization</h2>
-</div> -->
-
-<!-- add 3D json modules -->
-<div id="results" class="content-block">
-  <h2 class="title is-3 has-text-centered">3D visualization</h2>
-
-  <div class="task">
-    <div class="columns is-10 is-centered" style="position: relative;">
-      <div class="control" style="position: absolute; left: 20%;">
-        <label class="radio">
-          <input value="Raise" type="radio" name="scene"> Raise two arms
-        </label>
-        <br>
-        <label class="radio">
-          <input value="HitRightArm" type="radio" name="scene"> Hit by right arm
-        </label>
-        <br>
-        <label class="radio">
-          <input value="Sit" type="radio" name="scene"> Sit down
-        </label>
-        <br>
-        <label class="radio">
-          <input value="ChachaDance" type="radio" name="scene"> Cha-cha dance
-        </label>
-        <br>
-        <label class="radio">
-          <input value="Pillar" type="radio" name="scene"> Strike the pillar
-        </label>
-        <br>
-        <label class="radio">
-          <input value="Door" type="radio" name="scene"> Open the door
-        </label>
-        <br>
-        <label class="radio">
-          <input value="Soccer" type="radio" name="scene"> Kick the soccer ball
-        </label>
-      </div>
-      <div id="motion_loading" style="position: absolute; left: 50%; top: 45%;"></div>
-      <canvas id="webgl_pose" style="height: 50%; width: 50%;"></canvas>
-    </div>
-    <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;left: 25%;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
-  </div>
-</div>
-
-<div class="columns is-centered has-text-centered">
-  <h2 class="title is-3">More motions</h2>
-</div>
-
-<section class="hero is-light is-small">
+<!-- Video carousel -->
+<!-- <section class="hero is-small is-light">
   <div class="hero-body">
-    <div class="container">
+    <div class="container is-max-desktop">
+      <div class="has-text-centered">
+        <h2 class="title is-3">Features of TRUMANS Dataset</h2>
+      </div>
       <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-steve">
-          <video poster="" id="backwalk" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/backwalk.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-video1">
+          <div class="item has-text-centered">
+            <video poster="" id="video8" autoplay controls muted loop height="100%">
+              <source src="static/videos/AugObject.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Replaceable objects</h1>
+          </div>
         </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="boxing" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/boxing.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-video2">
+          <div class="item has-text-centered">
+            <video poster="" id="video9" autoplay controls muted loop height="100%">
+              <source src="static/videos/AugBack.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Replaceable background</h1>
+          </div>
         </div>
-        <div class="item item-shiba">
-          <video poster="" id="drunk_walk" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/drunk_walk.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-video3">
+          <div class="item has-text-centered">
+            <video poster="" id="video10" autoplay controls muted loop height="100%">
+              <source src="static/videos/Anno.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Extensive annotations</h1>
+          </div>
         </div>
-        <div class="item item-fullbody">
-          <video poster="" id="qiaqia" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/chacha.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-blueshirt">
-          <video poster="" id="bow" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/bow.mp4"
-                    type="video/mp4">
-          </video>
+        <div class="item item-video4">
+          <div class="item has-text-centered">
+            <video poster="" id="video11" autoplay controls muted loop height="100%">
+              <source src="static/videos/Wall.mp4"
+              type="video/mp4">
+            </video>
+            <h1 class="title is-4">Diverse HOI motions</h1>
+          </div>
         </div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
+<!-- End video carousel -->
 
-
-<section class="hero is-light is-small">
+<!-- Paper abstract -->
+<section class="hero is-small">
   <div class="hero-body">
-    <div class="container">
-      <div id="results-carousel" class="carousel results-carousel">
-        <div class="item item-fullbody">
-          <video poster="" id="jump" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/jump.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-steve">
-          <video poster="" id="salsa" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/salsa.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-chair-tp">
-          <video poster="" id="waltza" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/waltza.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-shiba">
-          <video poster="" id="yoga" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/yoga.mp4"
-                    type="video/mp4">
-          </video>
-        </div>
-        <div class="item item-fullbody">
-          <video poster="" id="zigzag" autoplay controls muted loop playsinline height="100%">
-            <source src="./static/videos/zigzag.mp4"
-                    type="video/mp4">
-          </video>
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              We propose <span class="dnerf">AnySkill</span>, a novel hierarchical method that learns physically plausible interactions following open-vocabulary instructions.
+            </p>
+            <p>
+              Our approach begins by developing a set of atomic actions via a low-level controller trained via imitation learning. 
+              Upon receiving an open-vocabulary textual instruction, <span class="dnerf">AnySkill</span> employs a high-level policy that selects and integrates these atomic actions to maximize the CLIP similarity between the agent's rendered images and the text.
+              An important feature of our method is the use of image-based rewards for the high-level policy, which allows the agent to learn interactions with objects without manual reward engineering. 
+            </p>
+            <p>
+              We show that <span class="dnerf">AnySkill</span> can turn casually captured selfie
+              We demonstrate <span class="dnerf">AnySkill</span>'s capability to generate realistic and natural motion sequences in response to unseen instructions of varying lengths, 
+              marking it the first method capable of open-vocabulary physical skill learning for interactive humanoid agents.
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
+<!-- End paper abstract -->
 
 
+<!-- Paper abstract -->
+<section class="hero is-small is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Motion Synthesis Method</h2>
+          <div class="content has-text-justified">
+            <img src="./static/images/teaser.png"/>
+            <p>
+              <span class="dnerf">AnySkill</span> model
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
 
+
+<!-- Image carousel -->
+<!--<section class="hero is-small">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <div id="results-carousel" class="carousel results-carousel">-->
+<!--       <div class="item">-->
+<!--        &lt;!&ndash; Your image here &ndash;&gt;-->
+<!--        <img src="static/images/carousel1.jpg" alt="MY ALT TEXT"/>-->
+<!--        <h2 class="subtitle has-text-centered">-->
+<!--          First image description.-->
+<!--        </h2>-->
+<!--      </div>-->
+<!--      <div class="item">-->
+<!--        &lt;!&ndash; Your image here &ndash;&gt;-->
+<!--        <img src="static/images/carousel2.jpg" alt="MY ALT TEXT"/>-->
+<!--        <h2 class="subtitle has-text-centered">-->
+<!--          Second image description.-->
+<!--        </h2>-->
+<!--      </div>-->
+<!--      <div class="item">-->
+<!--        &lt;!&ndash; Your image here &ndash;&gt;-->
+<!--        <img src="static/images/carousel3.jpg" alt="MY ALT TEXT"/>-->
+<!--        <h2 class="subtitle has-text-centered">-->
+<!--         Third image description.-->
+<!--       </h2>-->
+<!--     </div>-->
+<!--     <div class="item">-->
+<!--      &lt;!&ndash; Your image here &ndash;&gt;-->
+<!--      <img src="static/images/carousel4.jpg" alt="MY ALT TEXT"/>-->
+<!--      <h2 class="subtitle has-text-centered">-->
+<!--        Fourth image description.-->
+<!--      </h2>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+<!--</div>-->
+<!--</section>-->
+<!-- End image carousel -->
+
+
+<!-- Youtube video -->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      &lt;!&ndash; Paper video. &ndash;&gt;-->
+<!--      <h2 class="title is-3">Video Presentation</h2>-->
+<!--      <div class="columns is-centered has-text-centered">-->
+<!--        <div class="column is-four-fifths">-->
+<!--          -->
+<!--          <div class="publication-video">-->
+<!--            &lt;!&ndash; Youtube embed code here &ndash;&gt;-->
+<!--            <iframe src="https://www.youtube.com/embed/JkaxUblCGz0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>-->
+<!--          </div>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!-- End youtube video -->
+
+
+<!-- Paper poster -->
+<!--<section class="hero is-small is-light">-->
+<!--  <div class="hero-body">-->
+<!--    <div class="container">-->
+<!--      <h2 class="title">Poster</h2>-->
+
+<!--      <iframe  src="static/pdfs/sample.pdf" width="100%" height="550">-->
+<!--          </iframe>-->
+<!--        -->
+<!--    </div>-->
+<!--  </div>-->
+<!--</section>-->
+<!--End paper poster -->
+
+
+<!--BibTex citation -->
 <section class="section" id="BibTeX">
   <div class="container is-max-desktop content">
-    <h2 class="title">BibTeX</h2>
+    <div class="has-text-centered">
+      <h2 class="title is-3">BibTeX</h2>
+    </div>
     <pre><code>@inproceedings{cui2024anyskill,
       title={Anyskill: Learning Open-Vocabulary Physical Skill for Interactive Agents},
       author={Cui, Jieming and Liu, Tengyu and Liu, Nian and Yang, Yaodong and Zhu, Yixin and Huang, Siyuan},
@@ -431,142 +461,35 @@
     }</code></pre>
   </div>
 </section>
+<!--End BibTex citation -->
 
 
 <footer class="footer">
   <div class="container">
-    <div class="content has-text-centered">
-      <a class="icon-link"
-         href="https://github.com/jiemingcui/anyskill">
-        <i class="fas fa-file-pdf"></i>
-      </a>
-      <a class="icon-link" href="https://github.com/jiemingcui/anyskill" class="external-link" disabled>
-        <i class="fab fa-github"></i>
-      </a>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content has-text-centered">
+
+          <p>
+            This page was built using the <a href="https://github.com/eliahuhorwitz/Academic-project-page-template" target="_blank">Academic Project Page Template</a> which was adopted from the <a href="https://nerfies.github.io" target="_blank">Nerfies</a> project page.
+            You are free to borrow the template of this website, we just ask that you link back to this page in the footer. <br> This website is licensed under a <a rel="license"  href="http://creativecommons.org/licenses/by-sa/4.0/" target="_blank">Creative
+            Commons Attribution-ShareAlike 4.0 International License</a>.
+          </p>
+
+        </div>
+      </div>
     </div>
   </div>
 </footer>
 
+<!-- Statcounter tracking code -->
+
+<!-- You can add a tracker to track page visits by creating an account at statcounter.com -->
+
+<!-- End of Statcounter Code -->
+
+<script src="./animate.js" type="module"></script>
+
+
 </body>
-
-<script type="module">
-
-  import * as THREE from 'three'
-  import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-  import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
-  const clock = new THREE.Clock();
-
-  // let canvas1 = document.querySelector('canvas.webgl')
-  let canvas1 = document.querySelector('#webgl_pose')
-  let scene1 = new THREE.Scene()
-  let assetLoader1 = new GLTFLoader()
-  let model1
-
-  let camera1 = new THREE.PerspectiveCamera(45, 1.618 / 1.0, 0.1, 100)
-  camera1.position.set(4, 3, -3)
-  let grid1 = new THREE.GridHelper(30, 30)
-  scene1.add(camera1)
-  scene1.add(grid1)
-  for (let i = 0; i <= 1; i++) {
-    for (let k = 0; k <= 1; k++) {
-      let spotLight = new THREE.SpotLight(0xAAAAAA)
-      spotLight.position.set(50 * (i * 2 - 1), 100, 100 * (k * 2 - 1))
-      scene1.add(spotLight)
-    }
-  }
-
-
-  let controls1 = new OrbitControls(camera1, canvas1)
-  controls1.enableZoom = true
-  // controls2.enableDamping = true
-  controls1.object.position.set(camera1.position.x, camera1.position.y, camera1.position.z)
-  controls1.target = new THREE.Vector3(0, 0, 0)
-  controls1.update()
-
-  let renderer1 = new THREE.WebGLRenderer({
-      canvas: canvas1,
-      alpha: true,
-  })
-
-  // let content_width = document.querySelector('#results').offsetWidth
-  // renderer1.setSize(content_width, content_width / 1.618);
-  renderer1.setPixelRatio(Math.min(window.devicePixelRatio,2))
-  renderer1.outputEncoding = THREE.sRGBEncoding
-  renderer1.setAnimationLoop(() => {
-    renderer1.render(scene1, camera1)
-  });
-  
-  // function animate() {
-  //     if(mixer)
-  //         mixer.update(clock.getDelta());
-  //     renderer1.render(scene1, camera1);
-  // }
-
-  // renderer1.setAnimationLoop(animate);
-  // renderer1.setAnimationLoop(() => {
-  //   mixer.update(clock.getDelta());
-  // });
-
-  const radioButtons = document.querySelectorAll('input[name="scene"]')
-
-  for (const radioButton of radioButtons) {
-    radioButton.addEventListener('change', (e) => {
-      scene1.remove(model1)
-      document.querySelector('#motion_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
-      for (const rb of radioButtons) {rb.disabled = true}
-
-      let assetUrl = new URL('./assets/generated_motions/'+radioButton.value+'.glb', import.meta.url)
-      let mixer = null;
-      
-      assetLoader1.load(assetUrl.href, gltf => {
-        model1 = gltf.scene
-        model1.rotateX(-Math.PI / 2)
-        scene1.add(model1)
-
-        mixer = new THREE.AnimationMixer(model1);
-        const clips = gltf.animations;
-        clips.forEach(function(clip) {
-          const action = mixer.clipAction(clip);
-          action.play();
-        });
-
-        document.querySelector('#motion_loading').innerHTML = ''
-        for (const rb of radioButtons) {rb.disabled = false}
-      }, undefined, (error) => {console.error(error)})
-    })
-  }
-  radioButtons[0].click()
-
-  function resizeRenderers() {
-    let content_width = document.querySelector('#results').offsetWidth
-    console.log(content_width)
-    renderer1.setSize(content_width, content_width / 1.618)
-  }
-  window.addEventListener('resize', () => {
-    resizeRenderers()
-  })
-  resizeRenderers()
-
-  // const tick = () => {
-  //   const elapsedTime = clock.getElapsedTime();
-  //   const deltaTime = elapsedTime - previousTime;
-  //   previousTime = elapsedTime;
-  //   // Update mixer
-  //   if (mixer) {
-  //     mixer.update(deltaTime);
-  //   }
-  //   // Update controls
-  //   controls.update();
-  //   // Render
-  //   renderer1.render(scene1, camera1);
-  //   // Call tick again on the next frame
-  //   window.requestAnimationFrame(tick);
-  // };
-  // renderer1.setAnimationLoop(() => {
-  //   tick()
-  // });
-  // tick();
-
-</script>
-
 </html>
