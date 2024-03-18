@@ -487,9 +487,9 @@
   })
   renderer1.setPixelRatio(window.devicePixelRatio)
   renderer1.outputEncoding = THREE.sRGBEncoding
-  renderer1.setAnimationLoop(() => {
-    renderer1.render(scene1, camera1)
-  });
+  // renderer1.setAnimationLoop(() => {
+  //   renderer1.render(scene1, camera1)
+  // });
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
 
@@ -604,7 +604,10 @@
     // Call tick again on the next frame
     window.requestAnimationFrame(tick);
   };
-  tick();
+  renderer1.setAnimationLoop(() => {
+    tick()
+  });
+  // tick();
 
 </script>
 
