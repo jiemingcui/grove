@@ -329,7 +329,7 @@
         </label>
       </div>
       <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
-      <canvas id="webgl_pose" style="height: 60%; width: 60%;"></canvas>
+      <canvas id="webgl_pose" style="height: 60%; width: 65%;"></canvas>
     </div>
     <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;left: 25%;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
   </div>
@@ -574,14 +574,14 @@
   // load_model2()
 
   // resize renderers
-  function resizeRenderers() {
-    let content_width = document.querySelector('#results').offsetWidth
-    renderer1.setSize(content_width, content_width / 1.618)
-  }
-  window.addEventListener('resize', () => {
-    resizeRenderers()
-  })
-  resizeRenderers()
+  // function resizeRenderers() {
+  //   let content_width = document.querySelector('#results').offsetWidth
+  //   renderer1.setSize(content_width, content_width / 1.618)
+  // }
+  // window.addEventListener('resize', () => {
+  //   resizeRenderers()
+  // })
+  // resizeRenderers()
 </script>
 
 </html>
