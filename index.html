@@ -506,11 +506,9 @@
         mixer = new THREE.AnimationMixer(gltf.scene);
         const action = mixer.clipAction(gltf.animations[0]);
         action.play();
-        // gltf.scene.scale.set(0.025, 0.025, 0.025);
         model1 = gltf.scene
         model1.rotateX(-Math.PI / 2)
         scene1.add(model1)
-        // console.log("success");
         document.querySelector('#pose_loading').innerHTML = ''
         for (const rb of radioButtons) {rb.disabled = false}
       }, undefined, (error) => {console.error(error)})
