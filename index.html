@@ -328,7 +328,7 @@
           <input value="Soccer" type="radio" name="scene"> Kick the soccer ball
         </label>
       </div>
-      <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
+      <div id="motion_loading" style="position: absolute; left: 50%; top: 45%;"></div>
       <canvas id="webgl_pose" style="height: 60%; width: 65%;"></canvas>
     </div>
     <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;left: 25%;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
@@ -454,9 +454,10 @@
   import * as THREE from 'three'
   import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
   import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js'
+  const clock = new THREE.Clock();
 
-  // pose generation in 3D scene
-  let canvas1 = document.querySelector('#webgl_pose')
+  let canvas1 = document.querySelector('canvas.webgl')
+  // let canvas1 = document.querySelector('#webgl_pose')
   let scene1 = new THREE.Scene()
   let assetLoader1 = new GLTFLoader()
   let model1
@@ -474,6 +475,17 @@
     }
   }
 
+
+// here start
+  const sizes = {
+      width:window.innerWidth,
+      height:window.innerHeight
+  }
+  
+
+// here end
+
+
   let controls1 = new OrbitControls(camera1, canvas1)
   controls1.enableZoom = true
   // controls2.enableDamping = true
@@ -485,36 +497,28 @@
       canvas: canvas1,
       alpha: true,
   })
-  renderer1.setPixelRatio(window.devicePixelRatio)
+  renderer1.setPixelRatio(Math.min(window.devicePixelRatio,2))
   renderer1.outputEncoding = THREE.sRGBEncoding
-  
-  // const tick = () => {
-  //   const elapsedTime = clock.getElapsedTime();
-  //   const deltaTime = elapsedTime - previousTime;
-  //   previousTime = elapsedTime;
-  //   // Update mixer
-  //   if (mixer) {
-  //     mixer.update(deltaTime);
-  //   }
-  //   // Update controls
-  //   controls.update();
-  //   // // Render
-  //   renderer1.render(scene1, camera1);
-  //   // Call tick again on the next frame
-  //   window.requestAnimationFrame(tick);
-  // };
+  // renderer1.setAnimationLoop(() => {
+  //   renderer1.render(scene1, camera1)
+  //   // tick()
+  // });
 
-  renderer1.setAnimationLoop(() => {
-    renderer1.render(scene1, camera1)
-    // tick()
-  });
+  function animate() {
+      if(mixer)
+          mixer.update(clock.getDelta());
+      renderer.render(scene1, camera1);
+  }
+
+  renderer.setAnimationLoop(animate);
+
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
 
   for (const radioButton of radioButtons) {
     radioButton.addEventListener('change', (e) => {
       scene1.remove(model1)
-      document.querySelector('#pose_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
+      document.querySelector('#motion_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
       for (const rb of radioButtons) {rb.disabled = true}
 
       let assetUrl = new URL('./assets/generated_motions/'+radioButton.value+'.glb', import.meta.url)
@@ -527,7 +531,15 @@
         model1 = gltf.scene
         model1.rotateX(-Math.PI / 2)
         scene1.add(model1)
-        document.querySelector('#pose_loading').innerHTML = ''
+
+        mixer = new THREE.AnimationMixer(model1);
+        const clips = gltf.animations;
+        clips.forEach(function(clip) {
+          const action = mixer.clipAction(clip);
+          action.play();
+        });
+
+        document.querySelector('#motion_loading').innerHTML = ''
         for (const rb of radioButtons) {rb.disabled = false}
       }, undefined, (error) => {console.error(error)})
     })
