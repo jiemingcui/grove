@@ -489,11 +489,17 @@
   })
   renderer1.setPixelRatio(Math.min(window.devicePixelRatio,2))
   renderer1.outputEncoding = THREE.sRGBEncoding
+  
+  // function animate() {
+  //     if(mixer)
+  //         mixer.update(clock.getDelta());
+  //     renderer1.render(scene1, camera1);
+  // }
 
-  // renderer1.setAnimationLoop(() => {
-  //   renderer1.render(scene1, camera1)
-  //   // tick()
-  // });
+  // renderer1.setAnimationLoop(animate);
+  renderer1.setAnimationLoop(() => {
+    renderer1.render(scene1, camera1)
+  });
 
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
@@ -508,9 +514,6 @@
       let mixer = null;
       
       assetLoader1.load(assetUrl.href, gltf => {
-        // mixer = new THREE.AnimationMixer(gltf.scene);
-        // const action = mixer.clipAction(gltf.animations[0]);
-        // action.play();
         model1 = gltf.scene
         model1.rotateX(-Math.PI / 2)
         scene1.add(model1)
@@ -528,14 +531,7 @@
     })
   }
   radioButtons[0].click()
-  
-  function animate() {
-      if(mixer)
-          mixer.update(clock.getDelta());
-      renderer1.render(scene1, camera1);
-  }
 
-  renderer1.setAnimationLoop(animate);
   // // grasp generation for 3D object
   // let canvas2 = document.querySelector('#webgl_grasp')
   // let scene2 = new THREE.Scene()
