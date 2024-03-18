@@ -492,6 +492,7 @@
   });
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
+
   for (const radioButton of radioButtons) {
     radioButton.addEventListener('change', (e) => {
       scene1.remove(model1)
@@ -499,17 +500,24 @@
       for (const rb of radioButtons) {rb.disabled = true}
 
       let assetUrl = new URL('./assets/generated_motions/'+radioButton.value+'.glb', import.meta.url)
+      let mixer = null;
+      
       assetLoader1.load(assetUrl.href, gltf => {
+        mixer = new THREE.AnimationMixer(gltf.scene);
+        const action = mixer.clipAction(gltf.animations[0]);
+        action.play();
+        gltf.scene.scale.set(0.025, 0.025, 0.025);
         model1 = gltf.scene
         model1.rotateX(-Math.PI / 2)
         scene1.add(model1)
+        // console.log("success");
         document.querySelector('#pose_loading').innerHTML = ''
         for (const rb of radioButtons) {rb.disabled = false}
       }, undefined, (error) => {console.error(error)})
     })
   }
   radioButtons[0].click()
-
+  
   // // grasp generation for 3D object
   // let canvas2 = document.querySelector('#webgl_grasp')
   // let scene2 = new THREE.Scene()
@@ -582,6 +590,24 @@
     resizeRenderers()
   })
   resizeRenderers()
+
+  const tick = () => {
+    const elapsedTime = clock.getElapsedTime();
+    const deltaTime = elapsedTime - previousTime;
+    previousTime = elapsedTime;
+    // Update mixer
+    if (mixer) {
+      mixer.update(deltaTime);
+    }
+    // Update controls
+    controls.update();
+    // Render
+    renderer1.render(scene1, camera1);
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick);
+  };
+  tick();
+
 </script>
 
 </html>
