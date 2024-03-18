@@ -288,8 +288,6 @@
 </section>
 
 
-
-
 <div class="columns is-centered has-text-centered">
   <h2 class="title is-3">3D visualization</h2>
 </div>
@@ -330,7 +328,7 @@
         </label>
       </div>
       <div id="pose_loading" style="position: absolute; left: 50%; top: 45%;"></div>
-      <canvas id="webgl_pose" style="height: 80%; width: 80%;"></canvas>
+      <canvas id="webgl_pose" style="height: 70%; width: 70%;"></canvas>
     </div>
     <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;left: 25%;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
   </div>
@@ -571,14 +569,13 @@
   // }
 
   objSel.addEventListener('change', (e) => {samSel.value = ''})
-  samSel.addEventListener('change', load_model2)
-  load_model2()
+  // samSel.addEventListener('change', load_model2)
+  // load_model2()
 
   // resize renderers
   function resizeRenderers() {
     let content_width = document.querySelector('#results').offsetWidth
     renderer1.setSize(content_width, content_width / 1.618)
-    renderer2.setSize(content_width, content_width / 1.618)
   }
   window.addEventListener('resize', () => {
     resizeRenderers()
