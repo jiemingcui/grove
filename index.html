@@ -487,9 +487,27 @@
   })
   renderer1.setPixelRatio(window.devicePixelRatio)
   renderer1.outputEncoding = THREE.sRGBEncoding
-  // renderer1.setAnimationLoop(() => {
-  //   renderer1.render(scene1, camera1)
-  // });
+  
+  const tick = () => {
+    const elapsedTime = clock.getElapsedTime();
+    const deltaTime = elapsedTime - previousTime;
+    previousTime = elapsedTime;
+    // Update mixer
+    if (mixer) {
+      mixer.update(deltaTime);
+    }
+    // Update controls
+    controls.update();
+    // // Render
+    // renderer1.render(scene1, camera1);
+    // Call tick again on the next frame
+    window.requestAnimationFrame(tick);
+  };
+
+  renderer1.setAnimationLoop(() => {
+    renderer1.render(scene1, camera1)
+    tick()
+  });
 
   const radioButtons = document.querySelectorAll('input[name="scene"]')
 
@@ -589,24 +607,24 @@
   })
   resizeRenderers()
 
-  const tick = () => {
-    const elapsedTime = clock.getElapsedTime();
-    const deltaTime = elapsedTime - previousTime;
-    previousTime = elapsedTime;
-    // Update mixer
-    if (mixer) {
-      mixer.update(deltaTime);
-    }
-    // Update controls
-    controls.update();
-    // Render
-    renderer1.render(scene1, camera1);
-    // Call tick again on the next frame
-    window.requestAnimationFrame(tick);
-  };
-  renderer1.setAnimationLoop(() => {
-    tick()
-  });
+  // const tick = () => {
+  //   const elapsedTime = clock.getElapsedTime();
+  //   const deltaTime = elapsedTime - previousTime;
+  //   previousTime = elapsedTime;
+  //   // Update mixer
+  //   if (mixer) {
+  //     mixer.update(deltaTime);
+  //   }
+  //   // Update controls
+  //   controls.update();
+  //   // Render
+  //   renderer1.render(scene1, camera1);
+  //   // Call tick again on the next frame
+  //   window.requestAnimationFrame(tick);
+  // };
+  // renderer1.setAnimationLoop(() => {
+  //   tick()
+  // });
   // tick();
 
 </script>
