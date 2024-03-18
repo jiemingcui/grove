@@ -574,14 +574,14 @@
   // load_model2()
 
   // resize renderers
-  // function resizeRenderers() {
-  //   let content_width = document.querySelector('#results').offsetWidth
-  //   renderer1.setSize(content_width, content_width / 1.618)
-  // }
-  // window.addEventListener('resize', () => {
-  //   resizeRenderers()
-  // })
-  // resizeRenderers()
+  function resizeRenderers() {
+    let content_width = document.querySelector('#results').offsetWidth
+    renderer1.setSize(content_width, content_width / 1.618)
+  }
+  window.addEventListener('resize', () => {
+    resizeRenderers()
+  })
+  resizeRenderers()
 </script>
 
 </html>
