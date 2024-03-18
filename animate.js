@@ -4,7 +4,7 @@ import {GLTFLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/G
 import { DRACOLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/DRACOLoader';
 
 const W_H = 16 / 9;
-const allModelUrl = ['./assets/generated_motions/Sit.glb'];
+const allModelUrl = ['./assets/generated_motions/Raise.glb'];
 const allCanvas = document.querySelectorAll('canvas');
 const allRenders = [];
 
