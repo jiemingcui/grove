@@ -4,80 +4,106 @@ import {GLTFLoader} from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/G
 import { DRACOLoader } from 'https://unpkg.com/three@0.127.0/examples/jsm/loaders/DRACOLoader';
 
 const W_H = 16 / 9;
-const allModelUrl = ['./assets/generated_motions/Raise.glb'];
+const moSel = document.querySelector('#motionSelector')
+moSel.value = 'RaiseTwoArms'
+// let allModelUrl = ['./assets/generated_motions/RaiseTwoArms.glb'];
+// let allModelUrl = new URL(`./assets/grasp_generation_color/RaiseTwoArms.glb`, import.meta.url)
+let allModelUrl = './assets/generated_motions/' + moSel.value + '.glb';
 const allCanvas = document.querySelectorAll('canvas');
 const allRenders = [];
+let model;
+let mixer;
+
 
 // Process all canvas
-for (let i = 0; i < allCanvas.length; i++) {
-  const canvas = allCanvas[i];
-  const scene = new THREE.Scene();
-  const modelUrl = new URL(allModelUrl[i], import.meta.url);
+// function load_model() {
+console.log(allCanvas.length)
 
-  // load glb model and add to scene
-  let mixer;
+const canvas = allCanvas[0];
+const scene = new THREE.Scene();
+// const modelUrl = new URL('./assets/generated_motions/RaiseTwoArms.glb', import.meta.url);
+const modelUrl = new URL(allModelUrl, import.meta.url);
+// load glb model and add to scene
+
+// create camera
+const camera = new THREE.PerspectiveCamera(45, W_H, 0.1, 100);
+camera.position.set(3, 2, -3);
+scene.add(camera);
+
+// create light
+const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
+scene.add(light);
+
+// create grid
+const grid = new THREE.GridHelper(30, 30);
+scene.add(grid);
+
+// create controls
+const controls = new OrbitControls(camera, canvas);
+controls.enableZoom = true;
+controls.enableDamping = true;
+controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
+controls.target = new THREE.Vector3(0, 0, 0);
+controls.update();
+
+// create renderer
+const renderer = new THREE.WebGLRenderer({
+    canvas: canvas,
+    alpha: true
+});
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.outputEncoding = THREE.sRGBEncoding;
+
+const clock = new THREE.Clock();
+renderer.setAnimationLoop(() => {
+  if (mixer)
+    mixer.update(clock.getDelta());
+  renderer.render(scene, camera);
+});
+
+allRenders.push(renderer);
+
+
+function load_model(){
   const draco = new DRACOLoader();
   draco.setDecoderConfig({ type: 'js' });
   draco.setDecoderPath('https://www.gstatic.com/draco/v1/decoders/');
 
   const assetLoader = new GLTFLoader();
   assetLoader.setDRACOLoader(draco)
+  if (moSel.value == '') {
+    return
+  }
+  scene.remove(model)
+  document.querySelector('#motion_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
   assetLoader.load(modelUrl.href, function(gltf) {
-      const model = gltf.scene;
-      scene.add(model);
+    model = gltf.scene;
+    scene.add(model);
+    document.querySelector('#motion_loading').innerHTML = ''
+    mixer = new THREE.AnimationMixer(model);
+    const clips = gltf.animations;
 
-      mixer = new THREE.AnimationMixer(model);
-      const clips = gltf.animations;
-      clips.forEach(function(clip) {
-          const action = mixer.clipAction(clip);
-          action.play();
-      });
+    camera.position.set(3, 2, -3);
+    scene.add(camera);
+
+    clips.forEach(function(clip) {
+        const action = mixer.clipAction(clip);
+        action.play();
+    });
+
   }, undefined, function(error) {
       console.error(error);
   });
 
-  // create camera
-  const camera = new THREE.PerspectiveCamera(45, W_H, 0.1, 100);
-  camera.position.set(3, 2, -3);
-  scene.add(camera);
-
-  // create light
-  const light = new THREE.HemisphereLight(0xffffbb, 0x080820, 1);
-  scene.add(light);
-
-  // create grid
-  const grid = new THREE.GridHelper(30, 30);
-  scene.add(grid);
-
-  // create controls
-  const controls = new OrbitControls(camera, canvas);
-  controls.enableZoom = true;
-  controls.enableDamping = true;
-  controls.object.position.set(camera.position.x, camera.position.y, camera.position.z);
-  controls.target = new THREE.Vector3(0, 0, 0);
-  controls.update();
-
-  // create renderer
-  const renderer = new THREE.WebGLRenderer({
-      canvas: canvas,
-      alpha: true
-  });
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  renderer.outputEncoding = THREE.sRGBEncoding;
-
-  const clock = new THREE.Clock();
-  renderer.setAnimationLoop(() => {
-    if (mixer)
-      mixer.update(clock.getDelta());
-    renderer.render(scene, camera);
-  });
-
-  allRenders.push(renderer);
+  
 }
+
+moSel.addEventListener('change', load_model)
+load_model()
 
 // resize renderers
 function resizeRenderers() {
-  let content_width = document.querySelector('#teaser-demo').offsetWidth * 0.8;
+  let content_width = document.querySelector('#teaser-demo').offsetWidth * 0.9;
   for (let i = 0; i < allRenders.length; i++) {
     allRenders[i].setSize(content_width, content_width / W_H);
   }
