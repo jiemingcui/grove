@@ -244,12 +244,10 @@
       <div class="has-text-centered">
         <h2 class="title is-3">3D Visualization</h2>
         <!-- <h2 class="subtitle"><sup>*</sup>Drag mouse to rotate & scroll wheel to zoom in/out</h2> -->
-        <p style="margin: 0 1.5em; font-size: 0.8em; text-align:justify;left: 25%;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
+        <p style="color: rgb(247, 106, 31); margin: 0 1.5em; font-size: 0.8em; text-align:justify;left: 25%;">Note: Click the radio button to select a instruction for result visualization and drag to move your view around.</p>
       </div>
-
-
       <div class="carousel demo-carousel">
-        <div class="item has-text-centered">
+        <!-- <div class="item has-text-centered">
           <div class="control" style="position: absolute; left: 20%;">
             <label class="radio">
               <input value="Raise" type="radio" name="scene"> Raise two arms
@@ -280,10 +278,10 @@
             </label>
           </div>
           <canvas id="canvas1" class="webgl" style="height: 100%; width: 100%;"></canvas>
-          <!-- <h2 class="subtitle has-text-centered">
+          <h2 class="subtitle has-text-centered">
             Raise two arms
-          </h2> -->
-        </div>
+          </h2>
+        </div> -->
 
         <!-- <div class="item has-text-centered">
           <canvas id="canvas2" class="webgl" style="height: 100%; width: 100%;"></canvas>
@@ -298,7 +296,19 @@
             A Motion clip from TRUMANS dataset in a kitchen.
           </h2>
         </div> -->
-
+        <div style="position: absolute; left: 20%; top: 3%;">
+          <span style="font-size: 0.8em;">Motion Description </span>
+          <div class="select is-small">
+            <select id="motionSelector">
+              <option>Raise two arms</option>
+              <option>Sit down</option>
+              <option>Hit with right arm</option>
+              <option>Kick the ball</option>
+              <option>Strike the pillar</option>
+              <option>Open the door</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </div>
