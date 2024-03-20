@@ -8,21 +8,17 @@ const moSel = document.querySelector('#motionSelector')
 moSel.value = 'RaiseTwoArms'
 // let allModelUrl = ['./assets/generated_motions/RaiseTwoArms.glb'];
 // let allModelUrl = new URL(`./assets/grasp_generation_color/RaiseTwoArms.glb`, import.meta.url)
-let allModelUrl = './assets/generated_motions/' + moSel.value + '.glb';
 const allCanvas = document.querySelectorAll('canvas');
 const allRenders = [];
 let model;
 let mixer;
 
-
 // Process all canvas
 // function load_model() {
-console.log(allCanvas.length)
 
 const canvas = allCanvas[0];
 const scene = new THREE.Scene();
 // const modelUrl = new URL('./assets/generated_motions/RaiseTwoArms.glb', import.meta.url);
-const modelUrl = new URL(allModelUrl, import.meta.url);
 // load glb model and add to scene
 
 // create camera
@@ -74,8 +70,11 @@ function load_model(){
   if (moSel.value == '') {
     return
   }
+  let allModelUrl = './assets/generated_motions/' + moSel.value + '.glb';
+  
   scene.remove(model)
   document.querySelector('#motion_loading').innerHTML = `<img src="./assets/icons/loading.svg" width="48" height="48">`
+  let modelUrl = new URL(allModelUrl, import.meta.url);
   assetLoader.load(modelUrl.href, function(gltf) {
     model = gltf.scene;
     scene.add(model);
