@@ -102,7 +102,7 @@ load_model()
 
 // resize renderers
 function resizeRenderers() {
-  let content_width = document.querySelector('#teaser-demo').offsetWidth * 0.9;
+  let content_width = document.querySelector('#teaser-demo').offsetWidth * 1.0;
   for (let i = 0; i < allRenders.length; i++) {
     allRenders[i].setSize(content_width, content_width / W_H);
   }

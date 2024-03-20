@@ -189,12 +189,67 @@
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        <span class="dnerf">AnySkill</span> generate open-vocabulary, physical-plausiable, and interaction motions.
+        <span class="title is-5">AnySkill</span> generate open-vocabulary, physical-plausiable, and interaction motions.
       </h2>
     </div>
   </div>
 </section>
 <!-- End teaser demo -->
+
+
+<!-- Paper abstract -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Traditional approaches in physics-based motion generation, centered around imitation learning and reward shaping, often struggle to adapt to new scenarios. 
+              To tackle this limitation, we propose <span class="title is-6">AnySkill</span>, a novel hierarchical method that <b>learns physically plausible interactions following open-vocabulary instructions</b>. 
+              Our approach begins by developing a set of atomic actions via a low-level controller trained via imitation learning. Upon receiving an open-vocabulary textual instruction, <span class="title is-6">AnySkill</span> employs a high-level policy that selects and integrates these atomic actions to maximize the CLIP similarity between the agent's rendered images and the text. 
+              An important feature of our method is the use of image-based rewards for the high-level policy, which allows the agent to <b>learn interactions with objects without manual reward engineering</b>. 
+              We demonstrate <span class="title is-6">AnySkill</span>'s capability to generate realistic and natural motion sequences in response to unseen instructions of varying lengths, marking it the first method capable of open-vocabulary physical skill learning for interactive humanoid agents.
+            </p>
+          </div>
+        </div>
+      </div>
+      <!-- Paper video. -->
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <h2 class="title is-3">Video</h2>
+          <div class="publication-video">
+            <iframe src="https://www.youtube.com/embed/QojOdY2_dTQ?si=LQTNZPiDjER9B-_T" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen=""></iframe>
+          </div>
+        </div>
+      </div>
+      <!--/ Paper video. -->
+    </div>
+  </div>
+</section>
+<!-- End paper abstract -->
+
+
+<!-- Poster -->
+<section class="hero is-small">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <!-- <h2 class="title is-3"><span class="dnerf">AnySkill</span> model</h2> -->
+          <div class="content has-text-justified">
+            <img src="./static/images/teaser.png"/>
+              <p style="text-align: center;">
+                <span class="title is-6">AnySkill</span> model
+              </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- End poster -->
 
 
 <!-- 3D demo-->
@@ -233,57 +288,6 @@
   </div>
 </section>
 <!-- End 3D demo-->
-
-
-<!-- Paper abstract -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <h2 class="title is-3">Abstract</h2>
-          <div class="content has-text-justified">
-            <p>
-              We propose <span class="dnerf">AnySkill</span>, a novel hierarchical method that learns physically plausible interactions following open-vocabulary instructions.
-            </p>
-            <p>
-              Our approach begins by developing a set of atomic actions via a low-level controller trained via imitation learning. 
-              Upon receiving an open-vocabulary textual instruction, <span class="dnerf">AnySkill</span> employs a high-level policy that selects and integrates these atomic actions to maximize the CLIP similarity between the agent's rendered images and the text.
-              An important feature of our method is the use of image-based rewards for the high-level policy, which allows the agent to learn interactions with objects without manual reward engineering. 
-            </p>
-            <p>
-              We show that <span class="dnerf">AnySkill</span> can turn casually captured selfie
-              We demonstrate <span class="dnerf">AnySkill</span>'s capability to generate realistic and natural motion sequences in response to unseen instructions of varying lengths, 
-              marking it the first method capable of open-vocabulary physical skill learning for interactive humanoid agents.
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
-
-
-<!-- Paper abstract -->
-<section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column is-four-fifths">
-          <!-- <h2 class="title is-3"><span class="dnerf">AnySkill</span> model</h2> -->
-          <div class="content has-text-justified">
-            <img src="./static/images/teaser.png"/>
-              <p style="text-align: center;">
-                <span class="title is-6">AnySkill</span> model
-              </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<!-- End paper abstract -->
 
 
 <!-- Video carousel -->
