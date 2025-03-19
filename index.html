@@ -2,6 +2,35 @@
 <html>
 <head>
   <meta charset="utf-8">
+  <nav class="navbar" role="navigation" aria-label="main navigation">
+    <div class="navbar-brand">
+      <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false">
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+        <span aria-hidden="true"></span>
+      </a>
+    </div>
+    <div class="navbar-menu">
+      <div class="navbar-start" style="flex-grow: 1; justify-content: center;">
+        <a class="navbar-item" target="_blank" href="https://jiemingcui.github.io">
+          <span class="icon">
+            <i class="fas fa-home"></i>
+          </span>
+        </a>
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link">
+          More Research
+          </a>
+          <div class="navbar-dropdown">
+          <a class="navbar-item" target="_blank" href="https://anyskill.github.io/">
+              AnySkill
+          </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </nav>
+
   <meta name="description" content="DESCRIPTION META TAG">
   <meta property="og:title" content="SOCIAL MEDIA TITLE TAG"/>
   <meta property="og:description" content="SOCIAL MEDIA DESCRIPTION TAG TAG"/>
@@ -16,9 +45,9 @@
   <meta name="twitter:image" content="static/images/your_twitter_banner_image.png">
   <meta name="twitter:card" content="summary_large_image">
   <!-- Keywords for your paper to be indexed by-->
-  <meta name="keywords" content="Open-Vocabulary, Physical skill, Interactive agent">
+  <meta name="keywords" content="Generalized Reward, Open-Vocabulary, Physical skill">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AnySkill: Learning Open-Vocabulary Physical Skill for Interactive Agents</title>
+  <title>GROVE: A Generalized Reward for Learning Open-Vocabulary Physical Skill</title>
 
    <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
@@ -104,10 +133,10 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">AnySkill: Learning Open-Vocabulary Physical Skill for Interactive Agents</h1>            
+            <h1 class="title is-1 publication-title">GROVE: A Generalized Reward for Learning Open-Vocabulary Physical Skill</h1>            
             
             <div class="is-size-4 publication-authors">
-              <p><span class="author-block"><strong>CVPR 2024</strong></span></p>
+              <p><span class="author-block"><strong>CVPR 2025</strong></span></p>
             </div>
 
             <div class="is-size-5 publication-authors">
@@ -116,11 +145,18 @@
               <span class="author-block">
                 <a href="http://tengyu.ai/">Tengyu Liu</a><sup>2</sup>,</span>
               <span class="author-block">
-                <a href="https://anyskill.github.io/">Nian Liu</a><sup>3</sup>,
+                <a href="https://jiemingcui.github.io/grove/">Ziyu Meng</a><sup>2,3</sup>,
               </span>
               <span class="author-block">
-                <a href="https://www.yangyaodong.com/">Yaodong Yang</a><sup>1</sup>,
+                <a href="https://jiemingcui.github.io/grove/">Jiale Yu</a><sup>4</sup>,
               </span>
+              <span class="author-block">
+                <a href="https://jiemingcui.github.io/grove/">Ran Song</a><sup>4</sup>,
+              </span>
+              <span class="author-block">
+                <a href="https://jiemingcui.github.io/grove/">Wei Zhang</a><sup>4</sup>,
+              </span>
+              <br>
               <span class="author-block">
                 <a href="https://yzhu.io/">Yixin Zhu</a><sup>1</sup>,
               </span>
@@ -132,7 +168,8 @@
             <div class="is-size-5 publication-authors">
               <span class="author-block"><sup>1</sup>Institute for Artificial Intelligence, Peking University,</span>
               <span class="author-block"><sup>2</sup>National Key Laboratory of General Artificial Intelligence, BIGAI,</span>
-              <span class="author-block"><sup>3</sup>School of Artificial Intelligence, Beijing University of Posts and Telecommunications</span>
+              <span class="author-block"><sup>3</sup>School of Control Science and Engineering, Shandong University,</span>
+              <span class="author-block"><sup>4</sup>Department of Automation, Tsinghua University</span>
             </div>
             
 
@@ -169,7 +206,7 @@
                 </span>
                 <!-- Code Link. -->
                 <span class="link-block">
-                  <a href="https://github.com/jiemingcui/anyskill"
+                  <a href="https://github.com/jiemingcui/GROVE-pytorch"
                      class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                         <i class="fab fa-github"></i>
@@ -203,7 +240,7 @@
                 type="video/mp4">
       </video>
       <h2 class="subtitle has-text-centered">
-        <span class="title is-5">AnySkill</span> generate open-vocabulary, physical-plausiable, and interaction motions.
+        <span class="title is-5">GROVE</span> generate open-vocabulary, physical-plausiable, and interaction motions.
       </h2>
     </div>
   </div>
@@ -220,11 +257,14 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Traditional approaches in physics-based motion generation, centered around imitation learning and reward shaping, often struggle to adapt to new scenarios. 
-              To tackle this limitation, we propose <span class="title is-6">AnySkill</span>, a novel hierarchical method that <b>learns physically plausible interactions following open-vocabulary instructions</b>. 
-              Our approach begins by developing a set of atomic actions via a low-level controller trained via imitation learning. Upon receiving an open-vocabulary textual instruction, <span class="title is-6">AnySkill</span> employs a high-level policy that selects and integrates these atomic actions to maximize the CLIP similarity between the agent's rendered images and the text. 
-              An important feature of our method is the use of image-based rewards for the high-level policy, which allows the agent to <b>learn interactions with objects without manual reward engineering</b>. 
-              We demonstrate <span class="title is-6">AnySkill</span>'s capability to generate realistic and natural motion sequences in response to unseen instructions of varying lengths, marking it the first method capable of open-vocabulary physical skill learning for interactive humanoid agents.
+              Learning open-vocabulary physical skills for simulated agents presents a significant challenge in artificial intelligence. Current reinforcement learning approaches face critical limitations: 
+              manually designed rewards lack scalability across diverse tasks, while demonstration-based methods struggle to generalize beyond their training distribution. 
+              We introduce <span class="title is-6">GROVE</span>, a <b>generalized reward framework</b> that enables open-vocabulary physical skill learning <b>without manual engineering or task-specific demonstrations</b>. 
+              Our key insight is that LLM and VLM provide complementary guidance---LLM generate precise physical constraints capturing task requirements, while VLM evaluate motion semantics and naturalness. 
+              Through an iterative design process, VLM-based feedback continuously refines LLM-generated constraints, creating a self-improving reward system. 
+              To bridge the domain gap between simulation and natural images, we develop <span class="title is-6">Pose2CLIP</span>, a lightweight mapper that efficiently <b>projects agent poses directly into semantic feature space</b> without computationally expensive rendering. 
+              Extensive experiments across diverse embodiments and learning paradigms demonstrate <span class="title is-6">GROVE</span>'s effectiveness, achieving 22.2% higher motion naturalness and 25.7% better task completion scores while training 8.4x faster than previous methods.
+              These results establish a new foundation for scalable physical skill acquisition in simulated environments.
             </p>
           </div>
         </div>
